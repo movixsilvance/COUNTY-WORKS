@@ -1,0 +1,487 @@
+// Kakamega County Works - Simple Backend
+// Run:
+//   npm init -y
+//   npm install express cors
+//   node server.js
+//
+// Then open:
+//   http://localhost:3000
+
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+const PORT = 3000;
+
+app.use(cors());
+app.use(express.json());
+
+// =====================================================
+// SAMPLE DATA
+// =====================================================
+
+let opportunities = [
+    {
+        id: 1,
+        title: "ECDE Teacher Recruitment",
+        category: "jobs",
+        type: "job",
+        description:
+            "County opportunity for qualified ECDE teachers.",
+        deadline: "2026-09-15",
+        status: "open"
+    },
+    {
+        id: 2,
+        title: "County Internship Programme",
+        category: "jobs",
+        type: "internship",
+        description:
+            "Internship opportunities for recent graduates.",
+        deadline: "2026-09-20",
+        status: "open"
+    },
+    {
+        id: 3,
+        title: "Road Maintenance Services",
+        category: "tenders",
+        type: "tender",
+        description:
+            "Tender opportunity for maintenance and improvement of county roads.",
+        deadline: "2026-09-22",
+        status: "open"
+    },
+    {
+        id: 4,
+        title: "County Education Bursary",
+        category: "bursaries",
+        type: "bursary",
+        description:
+            "Financial assistance for eligible students from Kakamega County.",
+        deadline: "2026-09-18",
+        status: "open"
+    },
+    {
+        id: 5,
+        title: "Business Permit Renewal",
+        category: "business",
+        type: "permit",
+        description:
+            "Guide for renewing your county business permit.",
+        deadline: null,
+        status: "open"
+    },
+    {
+        id: 6,
+        title: "University Support Fund",
+        category: "bursaries",
+        type: "bursary",
+        description:
+            "Support programme for students pursuing university and technical education.",
+        deadline: "2026-09-28",
+        status: "open"
+    }
+];
+
+// =====================================================
+// DOCUMENT REQUIREMENTS
+// =====================================================
+
+const documents = {
+    bursary: [
+        "National ID / Birth Certificate",
+        "School or university admission letter",
+        "Current fee structure",
+        "Parent / Guardian ID",
+        "Proof of residence"
+    ],
+
+    job: [
+        "National ID",
+        "Academic certificates",
+        "Professional certificates",
+        "Updated CV",
+        "Application letter"
+    ],
+
+    permit: [
+        "National ID",
+        "Business registration certificate",
+        "Business location information",
+        "Previous permit (for renewal)",
+        "Payment information"
+    ],
+
+    tender: [
+        "Business registration certificate",
+        "KRA PIN",
+        "Tax compliance certificate",
+        "CR12 / ownership documents",
+        "Tender document"
+    ]
+};
+
+// =====================================================
+// SWAHILI GUIDES
+// =====================================================
+
+const guides = {
+    sha: {
+        title: "Jinsi ya kuapply SHA",
+        steps: [
+            "Fungua njia rasmi ya usajili wa SHA.",
+            "Weka taarifa zako kama ID number na namba ya simu.",
+            "Fuata hatua za kuthibitisha taarifa zako.",
+            "Hifadhi ujumbe au uthibitisho wa usajili."
+        ]
+    },
+
+    bursary: {
+        title: "Jinsi ya kuomba Bursary",
+        steps: [
+            "Angalia kama unatimiza masharti ya bursary.",
+            "Andaa ID, admission letter na fee structure.",
+            "Jaza fomu ya maombi kwa usahihi.",
+            "Wasilisha maombi kabla ya deadline."
+        ]
+    },
+
+    permit: {
+        title: "Jinsi ya kupata Business Permit",
+        steps: [
+            "Andaa taarifa za biashara yako.",
+            "Thibitisha eneo la biashara na aina ya biashara.",
+            "Fuata hatua za maombi ya permit.",
+            "Lipa ada inayohitajika na uhifadhi risiti."
+        ]
+    }
+};
+
+// =====================================================
+// SUBSCRIBERS
+// =====================================================
+
+let subscribers = [];
+
+// =====================================================
+// HOME / HEALTH CHECK
+// =====================================================
+
+app.get("/", (req, res) => {
+    res.json({
+        message: "Kakamega County Works API is running.",
+        version: "1.0",
+        endpoints: [
+            "GET /api/opportunities",
+            "GET /api/opportunities/:id",
+            "GET /api/search?q=jobs",
+            "GET /api/documents/:service",
+            "GET /api/guides",
+            "GET /api/guides/:id",
+            "POST /api/subscribe",
+            "POST /api/opportunities"
+        ]
+    });
+});
+
+// =====================================================
+// GET ALL OPPORTUNITIES
+// =====================================================
+
+app.get("/api/opportunities", (req, res) => {
+
+    const { category, type, status } = req.query;
+
+    let result = opportunities;
+
+    if (category) {
+        result = result.filter(
+            item => item.category === category
+        );
+    }
+
+    if (type) {
+        result = result.filter(
+            item => item.type === type
+        );
+    }
+
+    if (status) {
+        result = result.filter(
+            item => item.status === status
+        );
+    }
+
+    res.json({
+        success: true,
+        count: result.length,
+        data: result
+    });
+});
+
+// =====================================================
+// GET SINGLE OPPORTUNITY
+// =====================================================
+
+app.get("/api/opportunities/:id", (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const opportunity = opportunities.find(
+        item => item.id === id
+    );
+
+    if (!opportunity) {
+        return res.status(404).json({
+            success: false,
+            message: "Opportunity not found."
+        });
+    }
+
+    res.json({
+        success: true,
+        data: opportunity
+    });
+});
+
+// =====================================================
+// SEARCH
+// =====================================================
+
+app.get("/api/search", (req, res) => {
+
+    const query = (req.query.q || "")
+        .toLowerCase()
+        .trim();
+
+    if (!query) {
+        return res.json({
+            success: true,
+            count: opportunities.length,
+            data: opportunities
+        });
+    }
+
+    const results = opportunities.filter(item => {
+
+        const text = `
+            ${item.title}
+            ${item.category}
+            ${item.type}
+            ${item.description}
+        `.toLowerCase();
+
+        return text.includes(query);
+    });
+
+    res.json({
+        success: true,
+        count: results.length,
+        data: results
+    });
+});
+
+// =====================================================
+// DOCUMENT CHECKER
+// =====================================================
+
+app.get("/api/documents/:service", (req, res) => {
+
+    const service = req.params.service;
+
+    if (!documents[service]) {
+        return res.status(404).json({
+            success: false,
+            message: "Service not found."
+        });
+    }
+
+    res.json({
+        success: true,
+        service,
+        documents: documents[service]
+    });
+});
+
+// =====================================================
+// GET ALL GUIDES
+// =====================================================
+
+app.get("/api/guides", (req, res) => {
+
+    res.json({
+        success: true,
+        data: guides
+    });
+});
+
+// =====================================================
+// GET ONE GUIDE
+// =====================================================
+
+app.get("/api/guides/:id", (req, res) => {
+
+    const guide = guides[req.params.id];
+
+    if (!guide) {
+        return res.status(404).json({
+            success: false,
+            message: "Guide not found."
+        });
+    }
+
+    res.json({
+        success: true,
+        data: guide
+    });
+});
+
+// =====================================================
+// SUBSCRIBE TO NOTIFICATIONS
+// =====================================================
+
+app.post("/api/subscribe", (req, res) => {
+
+    const { phone } = req.body;
+
+    if (!phone) {
+        return res.status(400).json({
+            success: false,
+            message: "Phone number is required."
+        });
+    }
+
+    const cleanPhone = String(phone).trim();
+
+    if (cleanPhone.length < 9) {
+        return res.status(400).json({
+            success: false,
+            message: "Please enter a valid phone number."
+        });
+    }
+
+    if (subscribers.includes(cleanPhone)) {
+        return res.json({
+            success: true,
+            message: "This phone number is already subscribed."
+        });
+    }
+
+    subscribers.push(cleanPhone);
+
+    res.json({
+        success: true,
+        message: "You are subscribed to county opportunity alerts."
+    });
+});
+
+// =====================================================
+// ADMIN - ADD OPPORTUNITY
+// =====================================================
+
+app.post("/api/opportunities", (req, res) => {
+
+    const {
+        title,
+        category,
+        type,
+        description,
+        deadline
+    } = req.body;
+
+    if (!title || !category || !type) {
+        return res.status(400).json({
+            success: false,
+            message: "Title, category and type are required."
+        });
+    }
+
+    const newOpportunity = {
+        id: opportunities.length + 1,
+        title,
+        category,
+        type,
+        description: description || "",
+        deadline: deadline || null,
+        status: "open"
+    };
+
+    opportunities.push(newOpportunity);
+
+    res.status(201).json({
+        success: true,
+        message: "Opportunity added successfully.",
+        data: newOpportunity
+    });
+});
+
+// =====================================================
+// ADMIN - DELETE OPPORTUNITY
+// =====================================================
+
+app.delete("/api/opportunities/:id", (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const index = opportunities.findIndex(
+        item => item.id === id
+    );
+
+    if (index === -1) {
+        return res.status(404).json({
+            success: false,
+            message: "Opportunity not found."
+        });
+    }
+
+    const deleted = opportunities.splice(index, 1);
+
+    res.json({
+        success: true,
+        message: "Opportunity deleted.",
+        data: deleted[0]
+    });
+});
+
+// =====================================================
+// 404 HANDLER
+// =====================================================
+
+app.use((req, res) => {
+
+    res.status(404).json({
+        success: false,
+        message: "API endpoint not found."
+    });
+});
+
+// =====================================================
+// START SERVER
+// =====================================================
+
+app.listen(PORT, () => {
+
+    console.log(`
+=========================================
+ Kakamega County Works Backend
+=========================================
+
+ Server running at:
+ http://localhost:${PORT}
+
+ API:
+ http://localhost:${PORT}/api/opportunities
+
+ Search:
+ http://localhost:${PORT}/api/search?q=bursary
+
+ Documents:
+ http://localhost:${PORT}/api/documents/bursary
+
+ Guides:
+ http://localhost:${PORT}/api/guides
+
+=========================================
+    `);
+
+});

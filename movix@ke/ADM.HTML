@@ -1,0 +1,2117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kakamega County Works</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f8f6;
+    color:#17221c;
+    line-height:1.6;
+}
+
+button,input,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#087443;
+    color:white;
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+
+.header{
+    max-width:1200px;
+    margin:auto;
+    min-height:72px;
+    padding:12px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:white;
+    color:#087443;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.logo small{
+    font-weight:normal;
+}
+
+nav{
+    display:flex;
+    gap:22px;
+}
+
+nav a{
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#ffd34e;
+}
+
+.menu{
+    display:none;
+    border:1px solid white;
+    background:transparent;
+    color:white;
+    padding:8px 12px;
+    border-radius:7px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    background:linear-gradient(135deg,#055b35,#087443);
+    color:white;
+    padding:70px 20px;
+}
+
+.hero-inner{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:50px;
+    align-items:center;
+}
+
+.hero-label{
+    display:inline-block;
+    background:#dff5e8;
+    color:#087443;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(38px,6vw,65px);
+    line-height:1.05;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#ffd34e;
+}
+
+.hero p{
+    max-width:650px;
+    font-size:18px;
+    opacity:.95;
+    margin-bottom:28px;
+}
+
+.search{
+    max-width:650px;
+    display:flex;
+    background:white;
+    padding:6px;
+    border-radius:12px;
+}
+
+.search input{
+    flex:1;
+    border:0;
+    outline:0;
+    padding:14px;
+    min-width:0;
+}
+
+.search button{
+    background:#f4b400;
+    border:0;
+    border-radius:8px;
+    padding:0 22px;
+    font-weight:bold;
+}
+
+.hero-card{
+    background:white;
+    color:#17221c;
+    padding:28px;
+    border-radius:18px;
+    box-shadow:0 20px 45px rgba(0,0,0,.2);
+}
+
+.hero-card h3{
+    color:#087443;
+    margin-bottom:10px;
+}
+
+.deadline-row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px 0;
+    border-bottom:1px solid #dfe8e2;
+}
+
+.deadline-row:last-child{
+    border-bottom:0;
+}
+
+.red{
+    color:#d93025;
+}
+
+.blue{
+    color:#1769aa;
+}
+
+/* ================= GENERAL ================= */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:65px 20px;
+}
+
+.section-title{
+    margin-bottom:30px;
+}
+
+.section-title h2{
+    font-size:32px;
+    margin-bottom:5px;
+}
+
+.section-title p{
+    color:#647067;
+}
+
+/* ================= SERVICES ================= */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.service{
+    background:white;
+    border:1px solid #dfe8e2;
+    border-radius:16px;
+    padding:25px;
+    transition:.2s;
+}
+
+.service:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    border-color:#087443;
+}
+
+.icon{
+    width:55px;
+    height:55px;
+    border-radius:13px;
+    background:#e9f7ef;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    margin-bottom:15px;
+}
+
+.service h3{
+    margin-bottom:8px;
+}
+
+.service p{
+    color:#647067;
+    font-size:14px;
+}
+
+/* ================= OPPORTUNITIES ================= */
+
+.tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.tab{
+    background:white;
+    border:1px solid #dfe8e2;
+    padding:10px 18px;
+    border-radius:25px;
+    color:#647067;
+}
+
+.tab.active,
+.tab:hover{
+    background:#087443;
+    color:white;
+    border-color:#087443;
+}
+
+.opportunities{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.opportunity{
+    background:white;
+    border:1px solid #dfe8e2;
+    border-radius:16px;
+    padding:23px;
+}
+
+.type{
+    color:#087443;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.opportunity h3{
+    margin-bottom:8px;
+}
+
+.opportunity p{
+    color:#647067;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.deadline{
+    color:#d93025;
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:17px;
+}
+
+.btn{
+    background:#087443;
+    color:white;
+    border:0;
+    padding:11px 17px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#055b35;
+}
+
+.btn-yellow{
+    background:#f4b400;
+    color:#222;
+}
+
+/* ================= GUIDES ================= */
+
+.guides{
+    background:#eef7f1;
+}
+
+.guide-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.guide{
+    background:white;
+    border:1px solid #dfe8e2;
+    border-radius:16px;
+    padding:25px;
+}
+
+.number{
+    width:38px;
+    height:38px;
+    background:#087443;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    margin-bottom:14px;
+}
+
+.guide p{
+    color:#647067;
+    font-size:14px;
+    margin:8px 0 18px;
+}
+
+/* ================= DOCUMENT CHECKER ================= */
+
+.checker{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.checker-card{
+    background:white;
+    border:1px solid #dfe8e2;
+    border-radius:16px;
+    padding:28px;
+}
+
+.checker-card select{
+    width:100%;
+    padding:13px;
+    margin:15px 0;
+    border:1px solid #dfe8e2;
+    border-radius:8px;
+    background:white;
+}
+
+.documents{
+    list-style:none;
+}
+
+.documents li{
+    padding:11px;
+    border-bottom:1px solid #dfe8e2;
+}
+
+.documents li:last-child{
+    border-bottom:0;
+}
+
+.success{
+    color:#087443;
+    font-weight:bold;
+}
+
+.tip{
+    margin-top:18px;
+    background:#fff8df;
+    border-left:4px solid #f4b400;
+    padding:14px;
+    border-radius:7px;
+}
+
+/* ================= HELP ================= */
+
+.help-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.help-card{
+    background:white;
+    border:1px solid #dfe8e2;
+    border-radius:16px;
+    padding:28px;
+}
+
+.help-card p{
+    color:#647067;
+    margin:8px 0;
+}
+
+.help-card ul{
+    margin:15px 0 0 20px;
+    color:#647067;
+}
+
+.subscribe{
+    display:flex;
+    margin-top:15px;
+}
+
+.subscribe input{
+    flex:1;
+    padding:13px;
+    border:1px solid #dfe8e2;
+    border-radius:8px 0 0 8px;
+    outline:none;
+}
+
+.subscribe button{
+    border:0;
+    background:#087443;
+    color:white;
+    padding:0 18px;
+    border-radius:0 8px 8px 0;
+}
+
+#subscribeMessage{
+    margin-top:10px;
+    font-size:13px;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    background:#087443;
+    color:white;
+    text-align:center;
+    padding:60px 20px;
+}
+
+.cta h2{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.cta p{
+    margin-bottom:22px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#102019;
+    color:#d7e3db;
+    padding:45px 20px 20px;
+}
+
+.footer-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:30px;
+}
+
+footer h3{
+    color:white;
+    margin-bottom:12px;
+}
+
+footer p,
+footer li{
+    color:#aab9b0;
+    font-size:14px;
+}
+
+footer ul{
+    list-style:none;
+}
+
+footer li{
+    margin-bottom:8px;
+}
+
+.copyright{
+    max-width:1200px;
+    margin:30px auto 0;
+    padding-top:20px;
+    border-top:1px solid #293a31;
+    color:#8fa198;
+    font-size:13px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:2000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    width:min(600px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:18px;
+    padding:30px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    top:10px;
+    right:15px;
+    border:0;
+    background:none;
+    font-size:30px;
+    color:#647067;
+}
+
+.modal-box h2{
+    color:#087443;
+    margin-bottom:12px;
+}
+
+.modal-step{
+    display:flex;
+    gap:12px;
+    margin:17px 0;
+}
+
+.modal-step-number{
+    min-width:32px;
+    height:32px;
+    background:#087443;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .hero-inner{
+        grid-template-columns:1fr;
+    }
+
+    .services{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .opportunities{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .guide-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .checker{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:650px){
+
+    nav{
+        display:none;
+        position:absolute;
+        top:72px;
+        left:0;
+        right:0;
+        background:#055b35;
+        padding:20px;
+        flex-direction:column;
+    }
+
+    nav.show{
+        display:flex;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .search{
+        flex-direction:column;
+        background:transparent;
+        padding:0;
+        gap:8px;
+    }
+
+    .search input,
+    .search button{
+        min-height:50px;
+        border-radius:8px;
+    }
+
+    .services,
+    .opportunities,
+    .guide-grid,
+    .help-grid,
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:45px 20px;
+    }
+
+    .hero{
+        padding:50px 20px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .subscribe{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .subscribe input,
+    .subscribe button{
+        min-height:48px;
+        border-radius:8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+<div class="header">
+
+    <a href="#" class="logo">
+        <div class="logo-icon">K</div>
+
+        <div>
+            Kakamega County<br>
+            <small>Works</small>
+        </div>
+    </a>
+
+    <button class="menu" id="menuButton">☰</button>
+
+    <nav id="navigation">
+        <a href="#services">Services</a>
+        <a href="#opportunities">Jobs & Opportunities</a>
+        <a href="#guides">How-To Guides</a>
+        <a href="#checker">Document Checker</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+</div>
+</header>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="hero-inner">
+
+<div>
+
+    <div class="hero-label">
+        KAKAMEGA COUNTY DIGITAL SERVICES
+    </div>
+
+    <h1>
+        County services.<br>
+        <span>Made Simple.</span>
+    </h1>
+
+    <p>
+        Find county jobs, tenders, bursaries, business permits,
+        SHA guides and important county services — all in one place.
+    </p>
+
+    <div class="search">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search jobs, bursaries, tenders..."
+        >
+
+        <button id="searchButton">
+            Search
+        </button>
+    </div>
+
+</div>
+
+<div class="hero-card">
+
+    <h3>🔥 Closing Soon</h3>
+
+    <div class="deadline-row">
+        <span>ECDE Teacher Recruitment</span>
+        <strong class="red">5 days</strong>
+    </div>
+
+    <div class="deadline-row">
+        <span>County Bursary</span>
+        <strong class="red">8 days</strong>
+    </div>
+
+    <div class="deadline-row">
+        <span>Road Maintenance Tender</span>
+        <strong class="red">12 days</strong>
+    </div>
+
+    <div class="deadline-row">
+        <span>Business Permit Renewal</span>
+        <strong class="blue">Open</strong>
+    </div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+
+<section class="container" id="services">
+
+<div class="section-title">
+    <h2>What do you need?</h2>
+    <p>Access important county services without the confusion.</p>
+</div>
+
+<div class="services">
+
+<div class="service" data-category="jobs">
+    <div class="icon">💼</div>
+    <h3>County Jobs</h3>
+    <p>
+        Find ECDE, county government, internship and attachment
+        opportunities.
+    </p>
+</div>
+
+<div class="service" data-category="tenders">
+    <div class="icon">📋</div>
+    <h3>County Tenders</h3>
+    <p>
+        Search tenders, requirements, deadlines and documents.
+    </p>
+</div>
+
+<div class="service" data-category="bursaries">
+    <div class="icon">🎓</div>
+    <h3>Bursaries</h3>
+    <p>
+        Find bursary opportunities and learn how to apply.
+    </p>
+</div>
+
+<div class="service" data-category="business">
+    <div class="icon">🏪</div>
+    <h3>Business Permits</h3>
+    <p>
+        Understand permit requirements, fees and application steps.
+    </p>
+</div>
+
+</div>
+</section>
+
+<!-- ================= OPPORTUNITIES ================= -->
+
+<section class="container" id="opportunities">
+
+<div class="section-title">
+    <h2>Jobs & Opportunities</h2>
+    <p>Latest opportunities available on the platform.</p>
+</div>
+
+<div class="tabs">
+
+<button class="tab active" data-filter="all">
+    All
+</button>
+
+<button class="tab" data-filter="jobs">
+    Jobs
+</button>
+
+<button class="tab" data-filter="tenders">
+    Tenders
+</button>
+
+<button class="tab" data-filter="bursaries">
+    Bursaries
+</button>
+
+<button class="tab" data-filter="business">
+    Business
+</button>
+
+</div>
+
+<div class="opportunities" id="opportunityList">
+
+<!-- JOB -->
+
+<div class="opportunity" data-category="jobs">
+
+<div class="type">💼 County Job</div>
+
+<h3>ECDE Teacher Recruitment</h3>
+
+<p>
+Applications are open for qualified Early Childhood Development
+Education teachers.
+</p>
+
+<div class="deadline">
+⏰ Deadline: 15 September 2026
+</div>
+
+<button class="btn details"
+data-title="ECDE Teacher Recruitment"
+data-type="job">
+View Details
+</button>
+
+</div>
+
+<!-- INTERNSHIP -->
+
+<div class="opportunity" data-category="jobs">
+
+<div class="type">💼 Internship</div>
+
+<h3>County Internship Programme</h3>
+
+<p>
+Internship opportunities for recent graduates in various
+county departments.
+</p>
+
+<div class="deadline">
+⏰ Deadline: 20 September 2026
+</div>
+
+<button class="btn details"
+data-title="County Internship Programme"
+data-type="internship">
+View Details
+</button>
+
+</div>
+
+<!-- TENDER -->
+
+<div class="opportunity" data-category="tenders">
+
+<div class="type">📋 Tender</div>
+
+<h3>Road Maintenance Services</h3>
+
+<p>
+Tender opportunity for maintenance and improvement of
+county roads.
+</p>
+
+<div class="deadline">
+⏰ Deadline: 22 September 2026
+</div>
+
+<button class="btn details"
+data-title="Road Maintenance Services"
+data-type="tender">
+View Details
+</button>
+
+</div>
+
+<!-- BURSARY -->
+
+<div class="opportunity" data-category="bursaries">
+
+<div class="type">🎓 Bursary</div>
+
+<h3>County Education Bursary</h3>
+
+<p>
+Financial assistance for eligible students from Kakamega County.
+</p>
+
+<div class="deadline">
+⏰ Deadline: 18 September 2026
+</div>
+
+<button class="btn details"
+data-title="County Education Bursary"
+data-type="bursary">
+View Details
+</button>
+
+</div>
+
+<!-- BUSINESS -->
+
+<div class="opportunity" data-category="business">
+
+<div class="type">🏪 Business</div>
+
+<h3>Business Permit Renewal</h3>
+
+<p>
+Learn how to renew your county business permit and required documents.
+</p>
+
+<div class="deadline" style="color:#087443;">
+✓ Applications Open
+</div>
+
+<button class="btn details"
+data-title="Business Permit Renewal"
+data-type="permit">
+View Guide
+</button>
+
+</div>
+
+<!-- UNIVERSITY -->
+
+<div class="opportunity" data-category="bursaries">
+
+<div class="type">🎓 Education</div>
+
+<h3>University Support Fund</h3>
+
+<p>
+Support programme for students pursuing university and technical
+education.
+</p>
+
+<div class="deadline">
+⏰ Deadline: 28 September 2026
+</div>
+
+<button class="btn details"
+data-title="University Support Fund"
+data-type="bursary">
+View Details
+</button>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= GUIDES ================= -->
+
+<section class="guides" id="guides">
+
+<div class="container">
+
+<div class="section-title">
+    <h2>Jinsi ya kufanya?</h2>
+    <p>Simple step-by-step guides in Swahili.</p>
+</div>
+
+<div class="guide-grid">
+
+<div class="guide">
+
+<div class="number">1</div>
+
+<h3>Jinsi ya kuapply SHA</h3>
+
+<p>
+Mwongozo rahisi wa jinsi ya kujisajili na kupata huduma
+za Social Health Authority.
+</p>
+
+<button class="btn guideButton" data-guide="sha">
+Soma Mwongozo
+</button>
+
+</div>
+
+<div class="guide">
+
+<div class="number">2</div>
+
+<h3>Jinsi ya kuomba Bursary</h3>
+
+<p>
+Jifunze hatua za kuomba bursary ya county na nyaraka
+unazohitaji.
+</p>
+
+<button class="btn guideButton" data-guide="bursary">
+Soma Mwongozo
+</button>
+
+</div>
+
+<div class="guide">
+
+<div class="number">3</div>
+
+<h3>Jinsi ya kupata Business Permit</h3>
+
+<p>
+Mwongozo wa hatua kwa hatua wa kupata au kufanya
+renewal ya business permit.
+</p>
+
+<button class="btn guideButton" data-guide="permit">
+Soma Mwongozo
+</button>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= DOCUMENT CHECKER ================= -->
+
+<section class="container" id="checker">
+
+<div class="section-title">
+
+<h2>📄 Document Checker</h2>
+
+<p>
+Check what documents you need before starting your application.
+</p>
+
+</div>
+
+<div class="checker">
+
+<div class="checker-card">
+
+<h3>Select a service</h3>
+
+<select id="serviceSelect">
+
+<option value="">
+-- Choose service --
+</option>
+
+<option value="bursary">
+County Bursary
+</option>
+
+<option value="job">
+ECDE Job Application
+</option>
+
+<option value="permit">
+Business Permit
+</option>
+
+<option value="tender">
+County Tender
+</option>
+
+</select>
+
+<div id="documentResults">
+
+<p style="color:#647067;">
+Select a service to see the required documents.
+</p>
+
+</div>
+
+</div>
+
+<div class="checker-card">
+
+<h3>💡 Why use the checker?</h3>
+
+<p style="color:#647067;margin-top:10px;">
+Avoid starting an application only to discover that you are
+missing an important document.
+</p>
+
+<ul class="documents">
+
+<li>
+<span class="success">✓</span>
+Know requirements early
+</li>
+
+<li>
+<span class="success">✓</span>
+Reduce rejected applications
+</li>
+
+<li>
+<span class="success">✓</span>
+Save trips to county offices
+</li>
+
+<li>
+<span class="success">✓</span>
+Prepare documents in advance
+</li>
+
+</ul>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= HELP ================= -->
+
+<section class="container">
+
+<div class="section-title">
+
+<h2>Need Help?</h2>
+
+<p>
+Get answers and receive important county notifications.
+</p>
+
+</div>
+
+<div class="help-grid">
+
+<div class="help-card">
+
+<h3>📱 Don't have internet?</h3>
+
+<p>
+The platform can later support SMS and WhatsApp notifications.
+</p>
+
+<ul>
+<li>Job deadline alerts</li>
+<li>Bursary reminders</li>
+<li>Tender notifications</li>
+<li>Service instructions</li>
+</ul>
+
+</div>
+
+<div class="help-card">
+
+<h3>🔔 Never miss a deadline</h3>
+
+<p>
+Subscribe to receive county opportunity alerts.
+</p>
+
+<div class="subscribe">
+
+<input
+type="tel"
+id="phone"
+placeholder="Enter phone number"
+>
+
+<button id="subscribeButton">
+Subscribe
+</button>
+
+</div>
+
+<p id="subscribeMessage"></p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+<h2>County services made simple.</h2>
+
+<p>
+One place for jobs, bursaries, tenders, permits and guides.
+</p>
+
+<button
+class="btn btn-yellow"
+id="exploreButton"
+>
+Explore Opportunities
+</button>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="contact">
+
+<div class="footer-grid">
+
+<div>
+
+<h3>Kakamega County Works</h3>
+
+<p>
+A digital platform concept designed to make county services,
+opportunities and information easier to find and understand.
+</p>
+
+</div>
+
+<div>
+
+<h3>Services</h3>
+
+<ul>
+<li>County Jobs</li>
+<li>Tenders</li>
+<li>Bursaries</li>
+<li>Business Permits</li>
+</ul>
+
+</div>
+
+<div>
+
+<h3>Guides</h3>
+
+<ul>
+<li>SHA Registration</li>
+<li>Bursary Application</li>
+<li>Business Permit</li>
+<li>ECDE Jobs</li>
+</ul>
+
+</div>
+
+<div>
+
+<h3>Contact</h3>
+
+<ul>
+<li>Email: info@countyworks.ke</li>
+<li>Phone: 020 123 4567</li>
+<li>Kakamega County, Kenya</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 Kakamega County Works.
+Prototype — information should be verified against official county sources.
+
+</div>
+
+</footer>
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<button class="close" id="closeModal">
+×
+</button>
+
+<div id="modalContent"></div>
+
+</div>
+
+</div>
+
+<script>
+
+/* =====================================================
+   KAKAMEGA COUNTY WORKS
+   SIMPLE VANILLA JAVASCRIPT
+===================================================== */
+
+/* ================= MOBILE MENU ================= */
+
+const menuButton = document.getElementById("menuButton");
+const navigation = document.getElementById("navigation");
+
+menuButton.addEventListener("click", function(){
+
+    navigation.classList.toggle("show");
+
+});
+
+/* Close mobile menu after clicking link */
+
+document.querySelectorAll("#navigation a").forEach(function(link){
+
+    link.addEventListener("click", function(){
+
+        navigation.classList.remove("show");
+
+    });
+
+});
+
+/* ================= OPPORTUNITY FILTER ================= */
+
+const tabs = document.querySelectorAll(".tab");
+const opportunityCards = document.querySelectorAll(".opportunity");
+
+tabs.forEach(function(tab){
+
+    tab.addEventListener("click", function(){
+
+        tabs.forEach(function(item){
+            item.classList.remove("active");
+        });
+
+        tab.classList.add("active");
+
+        const filter = tab.dataset.filter;
+
+        opportunityCards.forEach(function(card){
+
+            if(filter === "all" ||
+               card.dataset.category === filter){
+
+                card.style.display = "block";
+
+            }else{
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+});
+
+/* ================= SEARCH ================= */
+
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+
+function performSearch(){
+
+    const query = searchInput.value
+        .toLowerCase()
+        .trim();
+
+    opportunityCards.forEach(function(card){
+
+        const text = card.innerText.toLowerCase();
+
+        if(query === "" || text.includes(query)){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("opportunities")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+searchButton.addEventListener("click", performSearch);
+
+searchInput.addEventListener("keydown", function(event){
+
+    if(event.key === "Enter"){
+        performSearch();
+    }
+
+});
+
+/* ================= SERVICE CARDS ================= */
+
+document.querySelectorAll(".service").forEach(function(service){
+
+    service.addEventListener("click", function(){
+
+        const category = service.dataset.category;
+
+        document.getElementById("opportunities")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+        const targetTab =
+            document.querySelector(
+                '.tab[data-filter="' + category + '"]'
+            );
+
+        if(targetTab){
+            targetTab.click();
+        }
+
+    });
+
+});
+
+/* ================= DOCUMENT CHECKER ================= */
+
+const serviceSelect =
+    document.getElementById("serviceSelect");
+
+const documentResults =
+    document.getElementById("documentResults");
+
+const documents = {
+
+    bursary: [
+
+        "National ID / Birth Certificate",
+
+        "School or university admission letter",
+
+        "Current fee structure",
+
+        "Parent / Guardian ID",
+
+        "Proof of residence"
+
+    ],
+
+    job: [
+
+        "National ID",
+
+        "Academic certificates",
+
+        "Professional certificates",
+
+        "Updated CV",
+
+        "Application letter"
+
+    ],
+
+    permit: [
+
+        "National ID",
+
+        "Business registration certificate",
+
+        "Business location information",
+
+        "Previous permit (for renewal)",
+
+        "Payment information"
+
+    ],
+
+    tender: [
+
+        "Business registration certificate",
+
+        "KRA PIN",
+
+        "Tax compliance certificate",
+
+        "CR12 / ownership documents",
+
+        "Tender document"
+
+    ]
+
+};
+
+serviceSelect.addEventListener("change", function(){
+
+    const selected = serviceSelect.value;
+
+    if(!selected){
+
+        documentResults.innerHTML =
+            '<p style="color:#647067;">Select a service to see the required documents.</p>';
+
+        return;
+
+    }
+
+    let html =
+        '<ul class="documents">';
+
+    documents[selected].forEach(function(documentName){
+
+        html +=
+            '<li>' +
+            '<span class="success">✓</span> ' +
+            documentName +
+            '</li>';
+
+    });
+
+    html +=
+        '</ul>' +
+
+        '<div class="tip">' +
+        '💡 <strong>Tip:</strong> Make sure all documents are valid and up to date before submitting your application.' +
+        '</div>';
+
+    documentResults.innerHTML = html;
+
+});
+
+/* ================= MODAL ================= */
+
+const modal =
+    document.getElementById("modal");
+
+const modalContent =
+    document.getElementById("modalContent");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+function openModal(content){
+
+    modalContent.innerHTML = content;
+
+    modal.classList.add("show");
+
+}
+
+function hideModal(){
+
+    modal.classList.remove("show");
+
+}
+
+closeModal.addEventListener("click", hideModal);
+
+modal.addEventListener("click", function(event){
+
+    if(event.target === modal){
+
+        hideModal();
+
+    }
+
+});
+
+/* Close modal with ESC */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        hideModal();
+
+    }
+
+});
+
+/* ================= OPPORTUNITY DETAILS ================= */
+
+document.querySelectorAll(".details").forEach(function(button){
+
+    button.addEventListener("click", function(){
+
+        const title =
+            button.dataset.title;
+
+        const type =
+            button.dataset.type;
+
+        let content = "";
+
+        if(type === "job"){
+
+            content = `
+
+            <h2>${title}</h2>
+
+            <p>
+            County opportunity for qualified ECDE teachers.
+            </p>
+
+            <div class="modal-step">
+                <div class="modal-step-number">1</div>
+                <div>
+                    Confirm that you meet the academic requirements.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">2</div>
+                <div>
+                    Prepare your ID, certificates and application documents.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">3</div>
+                <div>
+                    Complete the official application before the deadline.
+                </div>
+            </div>
+
+            <button class="btn" onclick="alert('Connect this button to the official county application portal.')">
+                Apply Now
+            </button>
+
+            `;
+
+        }
+
+        else if(type === "internship"){
+
+            content = `
+
+            <h2>${title}</h2>
+
+            <p>
+            Internship opportunities for qualified graduates.
+            </p>
+
+            <div class="modal-step">
+                <div class="modal-step-number">1</div>
+                <div>
+                    Check whether your qualification matches the position.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">2</div>
+                <div>
+                    Prepare your CV and academic certificates.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">3</div>
+                <div>
+                    Submit your application through the official channel.
+                </div>
+            </div>
+
+            <button class="btn">
+                Apply Now
+            </button>
+
+            `;
+
+        }
+
+        else if(type === "tender"){
+
+            content = `
+
+            <h2>${title}</h2>
+
+            <p>
+            County tender opportunity for eligible businesses.
+            </p>
+
+            <div class="modal-step">
+                <div class="modal-step-number">1</div>
+                <div>
+                    Check tender eligibility requirements.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">2</div>
+                <div>
+                    Download and complete the tender documents.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">3</div>
+                <div>
+                    Submit before the tender closing date.
+                </div>
+            </div>
+
+            <button class="btn">
+                View Tender Document
+            </button>
+
+            `;
+
+        }
+
+        else if(type === "bursary"){
+
+            content = `
+
+            <h2>${title}</h2>
+
+            <p>
+            Financial support for eligible students.
+            </p>
+
+            <div class="modal-step">
+                <div class="modal-step-number">1</div>
+                <div>
+                    Confirm that you meet the bursary eligibility requirements.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">2</div>
+                <div>
+                    Prepare your admission letter and fee structure.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">3</div>
+                <div>
+                    Complete and submit the bursary application.
+                </div>
+            </div>
+
+            <button class="btn">
+                Start Application
+            </button>
+
+            `;
+
+        }
+
+        else if(type === "permit"){
+
+            content = `
+
+            <h2>${title}</h2>
+
+            <p>
+            Learn the basic process for renewing a county business permit.
+            </p>
+
+            <div class="modal-step">
+                <div class="modal-step-number">1</div>
+                <div>
+                    Prepare your business registration information.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">2</div>
+                <div>
+                    Confirm your business location and permit details.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">3</div>
+                <div>
+                    Complete the renewal process and make payment.
+                </div>
+            </div>
+
+            <button class="btn">
+                Start Renewal
+            </button>
+
+            `;
+
+        }
+
+        openModal(content);
+
+    });
+
+});
+
+/* ================= SWAHILI GUIDES ================= */
+
+const guideButtons =
+    document.querySelectorAll(".guideButton");
+
+guideButtons.forEach(function(button){
+
+    button.addEventListener("click", function(){
+
+        const guide =
+            button.dataset.guide;
+
+        let content = "";
+
+        if(guide === "sha"){
+
+            content = `
+
+            <h2>Jinsi ya kuapply SHA</h2>
+
+            <div class="modal-step">
+                <div class="modal-step-number">1</div>
+                <div>
+                    Fungua tovuti au njia rasmi ya usajili wa SHA.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">2</div>
+                <div>
+                    Weka taarifa zako kama ID number na namba ya simu.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">3</div>
+                <div>
+                    Fuata hatua za kuthibitisha taarifa zako.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">4</div>
+                <div>
+                    Hifadhi ujumbe au uthibitisho wa usajili.
+                </div>
+            </div>
+
+            <p style="color:#d93025;margin-top:15px;">
+                ⚠️ Tumia taarifa kutoka vyanzo rasmi wakati wa usajili.
+            </p>
+
+            `;
+
+        }
+
+        else if(guide === "bursary"){
+
+            content = `
+
+            <h2>Jinsi ya kuomba Bursary</h2>
+
+            <div class="modal-step">
+                <div class="modal-step-number">1</div>
+                <div>
+                    Angalia kama unatimiza masharti ya bursary.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">2</div>
+                <div>
+                    Andaa ID, admission letter na fee structure.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">3</div>
+                <div>
+                    Jaza fomu ya maombi kwa usahihi.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">4</div>
+                <div>
+                    Wasilisha maombi kabla ya deadline.
+                </div>
+            </div>
+
+            `;
+
+        }
+
+        else if(guide === "permit"){
+
+            content = `
+
+            <h2>Jinsi ya kupata Business Permit</h2>
+
+            <div class="modal-step">
+                <div class="modal-step-number">1</div>
+                <div>
+                    Andaa taarifa za biashara yako.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">2</div>
+                <div>
+                    Thibitisha eneo la biashara na aina ya biashara.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">3</div>
+                <div>
+                    Fuata hatua za maombi ya permit.
+                </div>
+            </div>
+
+            <div class="modal-step">
+                <div class="modal-step-number">4</div>
+                <div>
+                    Lipa ada inayohitajika na uhifadhi risiti.
+                </div>
+            </div>
+
+            `;
+
+        }
+
+        openModal(content);
+
+    });
+
+});
+
+/* ================= SUBSCRIBE ================= */
+
+const subscribeButton =
+    document.getElementById("subscribeButton");
+
+subscribeButton.addEventListener("click", function(){
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const message =
+        document.getElementById("subscribeMessage");
+
+    if(phone.length < 9){
+
+        message.style.color = "#d93025";
+
+        message.textContent =
+            "Please enter a valid phone number.";
+
+        return;
+
+    }
+
+    message.style.color = "#087443";
+
+    message.textContent =
+        "✓ You are subscribed to county opportunity alerts.";
+
+});
+
+/* ================= EXPLORE BUTTON ================= */
+
+document.getElementById("exploreButton")
+.addEventListener("click", function(){
+
+    document.getElementById("opportunities")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+});
+async function loadOpportunities() {
+
+    try {
+
+        const response = await fetch("/api/opportunities");
+
+        const result = await response.json();
+
+        console.log(result);
+
+        const list =
+            document.getElementById("opportunityList");
+
+        list.innerHTML = "";
+
+        result.data.forEach(function(opportunity) {
+
+            list.innerHTML += `
+
+                <div class="opportunity"
+                     data-category="${opportunity.category}">
+
+                    <div class="type">
+                        ${opportunity.type}
+                    </div>
+
+                    <h3>
+                        ${opportunity.title}
+                    </h3>
+
+                    <p>
+                        ${opportunity.description}
+                    </p>
+
+                    <div class="deadline">
+                        ⏰ Deadline:
+                        ${opportunity.deadline || "Open"}
+                    </div>
+
+                    <button
+                        class="btn details"
+                        onclick="showOpportunity(${opportunity.id})">
+
+                        View Details
+
+                    </button>
+
+                </div>
+
+            `;
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Could not connect to backend:",
+            error
+        );
+
+    }
+}
+
+loadOpportunities();
+
+</script>
+
+</body>
+</html>
